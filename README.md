@@ -52,10 +52,10 @@ erDiagram
     }
 
     rider ||--o{ shuttle_service_reservation : makes
-    shuttle_service_reservation ||--|| shuttle_service : is for
+    shuttle_service_reservation ||--|| shuttle_service : is-for
     shuttle_service ||--|| shuttle_route : services
-    shuttle_service ||--|| shuttle_vehicle : is serviced by
-    shuttle_route ||--o{ shuttle_stop : includes
+    shuttle_service ||--|| shuttle_vehicle : is-serviced-by
+    shuttle_route ||--o{ shuttle_route_stop : includes
     
 
 ```
