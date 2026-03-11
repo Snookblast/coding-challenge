@@ -51,7 +51,7 @@ erDiagram
         int stop_sequence uk
     }
 
-    shuttle_segment_duration {
+    route_segment_duration {
         int segment_id pk
         int route_id fk
         int from_stop fk
