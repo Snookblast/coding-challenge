@@ -2,28 +2,60 @@
 
 ```mermaid
 erDiagram
-    user {
-        int user_id
+    rider {
+        int rider_id pk
+        string user_id fk
         string name
         string email
+        string mobile_phone
     }
 
-    shuttle_booking {
-        int booking_id pk
-        int shuttle_id fk
-        int user_id fk
-        int flight_id
-        decimal price
-        date booking_date
+    shuttle_service_reservation {
+        int reservation_id pk
+        int service_id fk
+        int rider_id fk
+        string scheduled_flight
+        decimal price 
+        date booking_date 
     }
 
-    shuttle {
-      int shuttle_id pk
-      int shuttle_operator fk
+    shuttle_service {
+        int service_id pk
+        int route_id fk
+        int vehicle_id fk
+        timestamp  scheduled_start
+    }
+
+    shuttle_vehicle {
+      int vehicle_id pk
+      int operator_id fk
       int max_occupancy
     }
 
-    USER ||--o{ SHUTTLE_BOOKING : makes
-    SHUTTLE ||--o{ SHUTTLE_BOOKING : assigned_to
+    shuttle_route {
+        int route_id pk
+        string route_name 
+    }
+
+    shuttle_stop {
+        int stop_id
+        string stop_name
+        decimal latitude
+        decimal longitude
+    }
+    
+    shuttle_route_stop {
+        int route_stop_id pk
+        int route_id uk
+        int stop_id uk
+        int stop_sequence uk
+    }
+
+    rider ||--o{ shuttle_service_reservation : makes
+    shuttle_service_reservation ||--|| shuttle_service : is for
+    shuttle_service ||--|| shuttle_route : services
+    shuttle_service ||--|| shuttle_vehicle : is serviced by
+    shuttle_route ||--o{ shuttle_stop : includes
+    
 
 ```
