@@ -56,6 +56,6 @@ erDiagram
     shuttle_service ||--|| shuttle_route : services
     shuttle_service ||--|| shuttle_vehicle : is-serviced-by
     shuttle_route ||--o{ shuttle_route_stop : includes
-    
+    shuttle_stop ||--o{ shuttle_route_stop : included-in-route-as
 
 ```
