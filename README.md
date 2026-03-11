@@ -10,20 +10,20 @@ erDiagram
         string mobile_phone
     }
 
-    shuttle_service_reservation {
+    shuttle_run_reservation {
         int reservation_id pk
-        int service_id fk
+        int run_id fk
         int rider_id fk
         string scheduled_flight
         decimal price 
         date booking_date 
     }
 
-    shuttle_service {
-        int service_id pk
+    shuttle_run {
+        int run_id pk
         int route_id fk
         int vehicle_id fk
-        timestamp  scheduled_start
+        timestamp scheduled_start
     }
 
     shuttle_vehicle {
@@ -62,10 +62,10 @@ erDiagram
         int duration_minutes
     }
 
-    rider ||--o{ shuttle_service_reservation : makes
-    shuttle_service_reservation ||--|| shuttle_service : is-for
-    shuttle_service ||--|| shuttle_route : services
-    shuttle_service ||--|| shuttle_vehicle : is-serviced-by
+    rider ||--o{ shuttle_run_reservation : makes
+    shuttle_run_reservation ||--|| shuttle_run : is-for
+    shuttle_run ||--|| shuttle_route : services
+    shuttle_run ||--|| shuttle_vehicle : is-serviced-by
     shuttle_route ||--o{ shuttle_route_stop : includes
     shuttle_stop ||--o{ shuttle_route_stop : included-in-route-as
 
