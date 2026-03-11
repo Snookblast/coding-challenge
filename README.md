@@ -51,6 +51,17 @@ erDiagram
         int stop_sequence uk
     }
 
+    shuttle_segment_duration {
+        int segment_id pk
+        int route_id fk
+        int from_stop fk
+        int to_stop fk
+        time segment_start
+        time segment_end
+        int day_type fk
+        int duration_minutes
+    }
+
     rider ||--o{ shuttle_service_reservation : makes
     shuttle_service_reservation ||--|| shuttle_service : is-for
     shuttle_service ||--|| shuttle_route : services
