@@ -1,4 +1,4 @@
-
+# Shuttle Service - Entity Relationship Diagram
 
 ```mermaid
 erDiagram
@@ -23,18 +23,27 @@ erDiagram
         int run_id pk
         int route_id fk
         int vehicle_id fk
+        int operator_id fk
         timestamp scheduled_start
+    }
+
+    shuttle_run_manifest {
+        int run_manifest_id pk
+        int run_id fk
+        int reservation_id fk
+        timestamp boarded_at
+        int boarded_stop fk
     }
 
     shuttle_vehicle {
       int vehicle_id pk
-      int operator_id fk
       int max_occupancy
     }
 
     shuttle_route {
         int route_id pk
-        string route_name 
+        string route_name
+        int duration_minutes
     }
 
     shuttle_stop {
@@ -65,8 +74,10 @@ erDiagram
     rider ||--o{ shuttle_run_reservation : makes
     shuttle_run_reservation ||--|| shuttle_run : is-for
     shuttle_run ||--|| shuttle_route : services
+    shuttle_run_manifest ||--o{ shuttle_run_reservation : records-reservation-boarded
     shuttle_run ||--|| shuttle_vehicle : is-serviced-by
     shuttle_route ||--o{ shuttle_route_stop : includes
     shuttle_stop ||--o{ shuttle_route_stop : included-in-route-as
+
 
 ```
